@@ -36,10 +36,10 @@ p {
 }
 .div-text {
   font-family: "Times New Roman", serif;
-  width: 33em;
+  width: 60%;
 }
 .anketa {
-  width: 33em;
+  width: 60%;
   height: auto;
 }
 .warning {
@@ -50,8 +50,8 @@ p {
 .progress {
   position: fixed;
   margin-left: 62%;
-  width: 18em;
-  height: 2em;
+  width: 35%;
+  height: 2%;
 }
 .progress-label {
   position: relative;
@@ -65,16 +65,16 @@ div.file-input-wrapper > input[type="file"] {
 }
 div.file-input-wrapper > button.file-input-button {
   font-family: "Times New Roman", serif;
-  margin-right: 0em;
-  margin-left: 0em;
+  margin-right: 0%;
+  margin-left: 0%;
 }
 textarea {
-  width: 25em;
+  width: 98%;
   border: 1px solid;
-  min-width: 25em;
-  max-width: 25em;
+  min-width: 98%;
+  max-width: 98%;
 }
 button {
-  margin-right: 6em;
-  margin-left: 6em;
+  margin-right: 20%;
+  margin-left: 15%;
 }
