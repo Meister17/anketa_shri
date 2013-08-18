@@ -41,8 +41,8 @@ p {
 }
 .progress {
   position: fixed;
-  margin-left: 33em;
-  width: 18em;
+  margin-left: 35em;
+  width: 20em;
   height: 2em;
 }
 .progress-label {
