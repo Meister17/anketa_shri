@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/sunny/jquery-ui.min.css"/>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="task3.js"></script>
+  <script type="text/javascript" src="task.js"></script>
 </head>
 <body>
   <form accept-character="utf-8" action="#" id="questionnaire" method="post">
@@ -276,35 +276,37 @@
           <button class="file-input-button">Выберите файл</button>
           <span id="cv_text" class="div-text">Файл не выбран</span><br>
         </div>
-        <b><span id="cv_warning" class="warning"></span></b>
+        <span id="cv_warning" class="warning"></span>
       </div>
     </div>
     <div>
       <h3> Ссылка на профиль в Моём круге </h3>
       <div>
         <input id="moikrug" type="text" class="input-text" onblur="CheckMoiKrug()" required="required">
-        <b><span id="moikrug_warning" class="warning"></span></b>
+        <span id="moikrug_warning" class="warning"></span>
       </div>
     </div>
     <div>
       <h3> Имя, Фамилия </h3>
       <div>
-        <input id="fio" type="text" class="input-text" onblur="CheckInputForWords('fio')">
-        <b><span id="fio_warning" class="warning"></span></b>
+        <input id="fio" type="text" class="input-text" onblur="CheckInputForWords('fio')"
+         onchange="AddFioToAgreement()" onkeypress="AddFioToAgreement()"
+         onpaste="AddFioToAgreement()" oninput="AddFioToAgreement()">
+        <span id="fio_warning" class="warning"></span>
       </div>
     </div>
     <div>
       <h3> Телефон </h3>
       <div>
         <input id="phone" type="text" class="input-text" onblur="CheckPhone()">
-        <b><span id="phone_warning" class="warning"></span></b>
+        <span id="phone_warning" class="warning"></span>
       </div>
     </div>
     <div>
       <h3> E-mail </h3>
       <div>
         <input id="email" type="text" class="input-text" onblur="CheckEmail()">
-        <b><span id="email_warning" class="warning"></span></b>
+        <span id="email_warning" class="warning"></span>
       </div>
     </div>
     <div>
@@ -328,19 +330,20 @@
         <option value="other"> Другое </option>
       </select>
     <p><input id="other_source" type="text" class="hide-input-text" onblur="UpdateProgress()"></p>
-    <p><b><span id="source_warning" class="warning"></span></b></p>
+    <p><span id="source_warning" class="warning"></span></p>
     <p>
       <input id="agree" type="checkbox" name="agree" value="agree" onchange="CheckAgreement()">
       <b>
-        Я даю своё согласие на передачу в ООО "Яндекс" резюме и/или анкеты,
+        <span id="agree_fio">Я</span>
+        даю своё согласие на передачу в ООО "Яндекс" резюме и/или анкеты,
         содержащих мои персональные данные, и согласен с тем, что они будут
         храниться в ООО "Яндекс" в течение 5 лет и будут обрабатываться
         исключительно для целей предложения мне вакансий группы компаний
         "Яндекс", в соответствии с Федеральным законом "О персональных данных".
       </b>
     </p>
-    <p><b><span id="agree_warning" class="warning"></span></b></p>
-    <input type="submit" value="Отправить">
+    <p><span id="agree_warning" class="warning"></span></p>
+    <input type="submit" class="submit" value="Отправить">
     <button type="button" onclick="ClearAll()"> Очистить </button>
   </div>
   </form>

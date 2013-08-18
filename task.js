@@ -223,6 +223,14 @@ function CheckCV() {
   UpdateProgress();
 }
 
+function AddFioToAgreement() {
+  if (!IsEmpty('fio')) {
+    SetSpanText("agree_fio", "Я, " + document.getElementById('fio').value + ", ");
+  } else {
+    SetSpanText("agree_fio", "Я");
+  }
+}
+
 function ClearAll() {
   document.getElementById('birth').value = "";
   ClearWarning('birth');
@@ -260,8 +268,10 @@ function ClearAll() {
   document.getElementById('additional_data').value = "";
   document.getElementById('source').selectedIndex = 0;
   document.getElementById('other_source').value = "";
+  HideInput('other_source');
   ClearWarning('source');
   document.getElementById('agree').checked = false;
   ClearWarning('agree');
+  SetSpanText('agree_fio', "Я");
   UpdateProgress();
 }
