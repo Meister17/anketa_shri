@@ -33,7 +33,7 @@ function GetPercent() {
       document.getElementById('eng_begin').checked +
       document.getElementById('eng_middle').checked +
       document.getElementById('eng_advanced').checked +
-      !IsEmpty('expect') + !IsEmpty('from_where') + !IsEmpty('job_time') +
+      !IsEmpty('expect') + !IsEmpty('from_know') + !IsEmpty('job_time') +
       !IsEmpty('experience') + !IsEmpty('prev_job') + !IsEmpty('software') +
       !IsEmpty('command_line') +
       (!IsEmpty('factorion') && NoWarning('factorion')) +
@@ -46,9 +46,9 @@ function GetPercent() {
       (!IsEmpty('phone') && NoWarning('phone')) +
       (!IsEmpty('email') && NoWarning('email'));
   var values = document.getElementById("source");
-  var selected = (values.options[values.selectedIndex].value.toString() != "choose") &&
-      ((values.options[values.selectedIndex].value.toString() != "other") ||
-       (!IsEmpty('other_source')));
+  var seleted_value = values.options[values.selectedIndex].value.toString();
+  var selected = (seleted_value != "choose") &&
+      ((seleted_value != "other") || (!IsEmpty('other_source')));
   var agreed = (document.getElementById("agree").checked == true);
   return 5 * questinnaire_number + 4 * auxiliary_number +
       3 * (NoWarning('source') && selected) +
@@ -67,7 +67,7 @@ function NoWarning(id) {
   return Trim(document.getElementById(id + '_warning').innerHTML.toString()) == "";
 }
 
-function CleanWarning(id) {
+function ClearWarning(id) {
   document.getElementById(id + "_warning").innerHTML = "";
 }
 
@@ -90,7 +90,7 @@ function CheckYear(id) {
       year > new Date().getFullYear())) {
     ShowWarning(id, "Укажите, пожалуйста, правильный год.");
   } else {
-    CleanWarning(id);
+    ClearWarning(id);
   }
   UpdateProgress();
 }
@@ -99,21 +99,24 @@ function CheckLink(id) {
   var link = Trim(document.getElementById(id).value.toString());
   if (link != "" &&
       ((link.indexOf("https://github.com/") != 0 &&
-        link.indexOf("https://jsfiddle.com/") != 0) || /\s/g.test(link))) {
+        link.indexOf("http://github.com/") != 0 &&
+        link.indexOf("https://jsfiddle.com/") != 0 &&
+        link.indexOf("http://jsfiddle.com/")) || /\s/g.test(link))) {
     ShowWarning(id, "Укажите, пожалуйста, правильную ссылку на Ваш проект.");
   } else {
-    CleanWarning(id);
+    ClearWarning(id);
   }
   UpdateProgress();
 }
 
 function CheckGithubLink() {
   var link = Trim(document.getElementById("makeup").value.toString());
-  if (link != "" && (link.indexOf("https://github.com/") != 0 ||
-                     /\s/g.test(link))) {
+  if (link != "" &&
+      ((link.indexOf("https://github.com/") != 0 &&
+        link.indexOf("http://github.com/")) || /\s/g.test(link))) {
     ShowWarning("makeup", "Укажите, пожалуйста, правильную ссылку на Ваш проект.");
   } else {
-    CleanWarning("makeup");
+    ClearWarning("makeup");
   }
   UpdateProgress();
 }
@@ -125,7 +128,7 @@ function CheckMoiKrug() {
        /\s/g.test(link))) {
     ShowWarning("moikrug", "Укажите, пожалуйста, правильную ссылку на Ваш профиль в Моём круге.");
   } else {
-    CleanWarning("moikrug");
+    ClearWarning("moikrug");
   }
   UpdateProgress();
 }
@@ -136,7 +139,7 @@ function CheckEmail() {
   if (email != "" && !re.test(email)) {
     ShowWarning("email", "Укажите, пожалуйста, правильный e-mail.");
   } else {
-    CleanWarning("email");
+    ClearWarning("email");
   }
   UpdateProgress();
 }
@@ -151,7 +154,7 @@ function CheckPhone() {
       return;
     }
   }
-  CleanWarning("phone");
+  ClearWarning("phone");
   UpdateProgress();
 }
 
@@ -160,7 +163,7 @@ function CheckInputForWords(id) {
   if (input != "" && !/\s+/g.test(input)) {
     ShowWarning(id, "Укажите, пожалуйста, необходимые данные полностью");
   } else {
-    CleanWarning(id);
+    ClearWarning(id);
   }
   UpdateProgress();
 }
@@ -172,7 +175,7 @@ function CheckSource() {
     ShowWarning("source", "Укажите, пожалуйста, откуда Вы узнали о нашем предложении.");
     HideInput("other_source");
   } else {
-    CleanWarning("source");
+    ClearWarning("source");
     if (selected_value == "other") {
       ShowInput("other_source");
     } else {
@@ -187,7 +190,7 @@ function CheckAgreement() {
   if (agreement == false) {
     ShowWarning("agree", "Без Вашего согласия участие в конкурсе невозможно.");
   } else {
-    CleanWarning("agree");
+    ClearWarning("agree");
   }
   UpdateProgress();
 }
@@ -206,7 +209,7 @@ function CheckCV() {
     SetSpanText("cv_text", "Файл не выбран");
     ShowWarning("cv", "Приложенный Вами файл больше 250 кб");
   } else {
-    CleanWarning("cv");
+    ClearWarning("cv");
     var start = 0;
     if (cv.value.indexOf('\\') >= 0) {
       start = cv.value.lastIndexOf('\\');
@@ -217,5 +220,48 @@ function CheckCV() {
     }
     SetSpanText("cv_text", filename);;
   }
+  UpdateProgress();
+}
+
+function ClearAll() {
+  document.getElementById('birth').value = "";
+  ClearWarning('birth');
+  document.getElementById('city').value = "";
+  document.getElementById('education').value = "";
+  document.getElementById('education').value = "";
+  document.getElementById('graduate').value = "";
+  ClearWarning('graduate');
+  document.getElementById('eng_begin').checked = false;
+  document.getElementById('eng_middle').checked = false;
+  document.getElementById('eng_advanced').checked = false;
+  document.getElementById('eng_comments').value = "";
+  document.getElementById('expect').value = "";
+  document.getElementById('from_know').value = "";
+  document.getElementById('job_time').value = "";
+  document.getElementById('experience').value = "";
+  document.getElementById('prev_job').value = "";
+  document.getElementById('software').value = "";
+  document.getElementById('command_line').value = "";
+  document.getElementById('factorion').value = "";
+  ClearWarning('factorion');
+  document.getElementById('vessel').value = "";
+  ClearWarning('vessel');
+  document.getElementById('makeup').value = "";
+  ClearWarning('makeup');
+  SetSpanText('cv_text', '');
+  document.getElementById('moikrug').value = "";
+  ClearWarning('moikrug');
+  document.getElementById('fio').value = "";
+  ClearWarning('fio');
+  document.getElementById('phone').value = "";
+  ClearWarning('phone');
+  document.getElementById('email').value = "";
+  ClearWarning('email');
+  document.getElementById('additional_data').value = "";
+  document.getElementById('source').selectedIndex = 0;
+  document.getElementById('other_source').value = "";
+  ClearWarning('source');
+  document.getElementById('agree').checked = false;
+  ClearWarning('agree');
   UpdateProgress();
 }

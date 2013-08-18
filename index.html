@@ -79,7 +79,7 @@
         <p class="p-text"><input id="eng_begin" type="radio" name="EnglishRadioButtons" onchange="UpdateProgress()"> Начальный </p>
         <p class="p-text"><input id="eng_middle" type="radio" name="EnglishRadioButtons" onchange="UpdateProgress()"> Средний </p>
         <p class="p-text"><input id="eng_advanced" type="radio" name="EnglishRadioButtons" onchange="UpdateProgress()"> Сводобное владение </p>
-        <p><textarea rows="4" cols="80"></textarea></p>
+        <p><textarea id="eng_comments" rows="4" cols="80"></textarea></p>
       </div>
     </div>
     <div>
@@ -93,7 +93,7 @@
       <h3> Вопрос 7 </h3>
       <div>
         <p class="p-text"><b> Откуда Вы о нас узнали? </b></p>
-        <p><textarea id="from_where" rows="4" cols="80" onblur="UpdateProgress()"></textarea></p>
+        <p><textarea id="from_know" rows="4" cols="80" onblur="UpdateProgress()"></textarea></p>
       </div>
     </div>
     <div>
@@ -310,7 +310,7 @@
     <div>
       <h3> Дополнительные сведения </h3>
       <div>
-        <textarea rows="4" cols="80"></textarea>
+        <textarea id="additional_data" rows="4" cols="80"></textarea>
       </div>
     </div>
   </div>
@@ -340,8 +340,8 @@
       </b>
     </p>
     <p><b><span id="agree_warning" class="warning"></span></b></p>
-    <button type="button"> Отправить </button>
-    <button type="button"> Очистить </button>
+    <input type="submit" value="Отправить">
+    <button type="button" onclick="ClearAll()"> Очистить </button>
   </div>
   </form>
 </body>
