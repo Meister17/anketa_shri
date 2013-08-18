@@ -46,7 +46,9 @@ function GetPercent() {
       (!IsEmpty('phone') && NoWarning('phone')) +
       (!IsEmpty('email') && NoWarning('email'));
   var values = document.getElementById("source");
-  var selected = (values.options[values.selectedIndex].value.toString() != "choose");
+  var selected = (values.options[values.selectedIndex].value.toString() != "choose") &&
+      ((values.options[values.selectedIndex].value.toString() != "other") ||
+       (!IsEmpty('other_source')));
   var agreed = (document.getElementById("agree").checked == true);
   return 5 * questinnaire_number + 4 * auxiliary_number +
       3 * (NoWarning('source') && selected) +
@@ -73,6 +75,14 @@ function ShowWarning(id, message) {
   document.getElementById(id + "_warning").innerHTML = message;
 }
 
+function ShowInput(id) {
+  document.getElementById(id).style.display = "inline";
+}
+
+function HideInput(id) {
+  document.getElementById(id).style.display = "none";
+}
+
 function CheckYear(id) {
   var year = Trim(document.getElementById(id).value.toString());
   var current_year = new Date().getFullYear();
@@ -81,10 +91,8 @@ function CheckYear(id) {
     ShowWarning(id, "Укажите, пожалуйста, правильный год.");
   } else {
     CleanWarning(id);
-    if (year != "") {
-      UpdateProgress();
-    }
   }
+  UpdateProgress();
 }
 
 function CheckLink(id) {
@@ -95,10 +103,8 @@ function CheckLink(id) {
     ShowWarning(id, "Укажите, пожалуйста, правильную ссылку на Ваш проект.");
   } else {
     CleanWarning(id);
-    if (link != "") {
-      UpdateProgress();
-    }
   }
+  UpdateProgress();
 }
 
 function CheckGithubLink() {
@@ -108,10 +114,8 @@ function CheckGithubLink() {
     ShowWarning("makeup", "Укажите, пожалуйста, правильную ссылку на Ваш проект.");
   } else {
     CleanWarning("makeup");
-    if (link != "") {
-      UpdateProgress();
-    }
   }
+  UpdateProgress();
 }
 
 function CheckMoiKrug() {
@@ -122,10 +126,8 @@ function CheckMoiKrug() {
     ShowWarning("moikrug", "Укажите, пожалуйста, правильную ссылку на Ваш профиль в Моём круге.");
   } else {
     CleanWarning("moikrug");
-    if (link != "") {
-      UpdateProgress();
-    }
   }
+  UpdateProgress();
 }
 
 function CheckEmail() {
@@ -135,10 +137,8 @@ function CheckEmail() {
     ShowWarning("email", "Укажите, пожалуйста, правильный e-mail.");
   } else {
     CleanWarning("email");
-    if (email != "") {
-      UpdateProgress();
-    }
   }
+  UpdateProgress();
 }
 
 function CheckPhone() {
@@ -147,13 +147,12 @@ function CheckPhone() {
   for (var index = 0; index < parts.length; ++index) {
     if (parts[index] != "" && !/^\d+$/g.test(parts[index])) {
       ShowWarning("phone", "Укажите, пожалуйста, правильный номер телефона.");
+      UpdateProgress();
       return;
     }
   }
   CleanWarning("phone");
-  if (phone != "") {
-    UpdateProgress();
-  }
+  UpdateProgress();
 }
 
 function CheckInputForWords(id) {
@@ -162,10 +161,8 @@ function CheckInputForWords(id) {
     ShowWarning(id, "Укажите, пожалуйста, необходимые данные полностью");
   } else {
     CleanWarning(id);
-    if (input != "") {
-      UpdateProgress();
-    }
   }
+  UpdateProgress();
 }
 
 function CheckSource() {
@@ -173,10 +170,16 @@ function CheckSource() {
   var selected_value = values.options[values.selectedIndex].value.toString();
   if (selected_value == "choose") {
     ShowWarning("source", "Укажите, пожалуйста, откуда Вы узнали о нашем предложении.");
+    HideInput("other_source");
   } else {
     CleanWarning("source");
-    UpdateProgress();
+    if (selected_value == "other") {
+      ShowInput("other_source");
+    } else {
+      HideInput("other_source");
+    }
   }
+  UpdateProgress();
 }
 
 function CheckAgreement() {
@@ -185,8 +188,8 @@ function CheckAgreement() {
     ShowWarning("agree", "Без Вашего согласия участие в конкурсе невозможно.");
   } else {
     CleanWarning("agree");
-    UpdateProgress();
   }
+  UpdateProgress();
 }
 
 function SetSpanText(id, text) {
@@ -212,7 +215,7 @@ function CheckCV() {
     if (filename.indexOf('\\') == 0 || filename.indexOf('/') == 0) {
       filename = filename.substring(1);
     }
-    SetSpanText("cv_text", filename);
-    UpdateProgress();
+    SetSpanText("cv_text", filename);;
   }
+  UpdateProgress();
 }
