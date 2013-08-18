@@ -1,0 +1,347 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Школа разработки интерфейсов </title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.min.css"/>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="task3.js"></script>
+</head>
+<body>
+  <form accept-character="utf-8" action="#" id="questionnaire" method="post">
+  <div class="div-text">
+    <h1> Анкета второй Школы разработки<br> интерфейсов в Москве </h1>
+    <p> Яндекс открывает набор во вторую Школу разработки интерфейсов в Москве. </p>
+    <p>
+      Для поступления необходимо заполнить анкету с тестовыми заданиями.
+      Приём заявок закрывается 19 августа в 23:59 по московскому времени.
+      По результатам теста мы пригласим в Школу 30-40 человек.
+    </p>
+    <p>
+      Подробности о Школе читайте на
+      <a href="http://events.yandex.ru/shri/">этой странице</a>.
+    </p>
+    <h2> Заполните анкету </h2>
+  </div>
+  <div id="progressbar" class="progress">
+    <div id="progress_label" class="progress-label"></div>
+  </div>
+  <div id="accordion" class="anketa">
+    <div>
+      <h3> Вопрос 1 </h3>
+      <div>
+        <p class="p-text">
+          <b> Год рождения. </b> 
+        </p>
+        <p>
+          <textarea id="birth" rows="1" cols="80" onblur="CheckYear('birth')"></textarea>
+          <span id="birth_warning" class="warning"></span>
+        </p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 2 </h3>
+      <div>
+        <p class="p-text"><b> Город, в котором Вы живёте. </b></p>
+        <p><textarea id="city" rows="4" cols="80" onblur="UpdateProgress()"></textarea></p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 3 </h3>
+      <div>
+        <p class="p-text">
+          <b> Вуз, факультет, специальность, кафедра. </b>
+        </p>
+        <p>
+          <textarea id="education" rows="4" cols="80" onblur="CheckInputForWords('education')"></textarea>
+          <span id="education_warning" class="warning"></span>
+        </p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 4 </h3>
+      <div>
+        <p class="p-text">
+          <b> Год окончания вуза. </b>
+        </p>
+        <p>
+          <textarea id="graduate" rows="1" cols="80" onblur="CheckYear('graduate')"></textarea>
+          <span id="graduate_warning" class="warning"></span>
+        </p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 5 </h3>
+      <div>
+        <p class="p-text"><b> Уровень владения английским языком. </b></p>
+        <p class="p-text"><input id="eng_begin" type="radio" name="EnglishRadioButtons" onchange="UpdateProgress()"> Начальный </p>
+        <p class="p-text"><input id="eng_middle" type="radio" name="EnglishRadioButtons" onchange="UpdateProgress()"> Средний </p>
+        <p class="p-text"><input id="eng_advanced" type="radio" name="EnglishRadioButtons" onchange="UpdateProgress()"> Сводобное владение </p>
+        <p><textarea rows="4" cols="80"></textarea></p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 6 </h3>
+      <div>
+        <p class="p-text"><b> Чего Вы ожидаете от участия в школе? </b></p>
+        <p><textarea id="expect" rows="4" cols="80" onblur="UpdateProgress()"></textarea></p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 7 </h3>
+      <div>
+        <p class="p-text"><b> Откуда Вы о нас узнали? </b></p>
+        <p><textarea id="from_where" rows="4" cols="80" onblur="UpdateProgress()"></textarea></p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 8 </h3>
+      <div>
+        <p class="p-text">
+          <b>
+            Сколько времени Вы были бы готовы уделять стажировке или работе в Яндексе?
+          </b>
+        </p>
+        <p><textarea id="job_time" rows="4" cols="80" onblur="UpdateProgress()"></textarea></p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 9 </h3>
+      <div>
+        <p class="p-text">
+          <b>
+            Расскажите о Вашем опыте разработки. Нам будет интересно всё - как
+            серьёзный интерфейс, так и просто домашняя страничка.
+          </b>
+        </p>
+        <p><textarea id="experience" rows="4" cols="80" onblur="UpdateProgress()"></textarea></p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 10 </h3>
+      <div>
+        <p class="p-text">
+          <b>
+            Если Вы где-нибудь работали, расскажите, какие у Вас были должностные
+            обязанности и был ли опыт работы в команде.
+          </b>
+        </p>
+        <p><textarea id="prev_job" rows="4" cols="80" onblur="UpdateProgress()"></textarea></p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 11 </h3>
+      <div>
+        <p class="p-text">
+          <b>
+            Перечислите, каким программными продуктами Вы пользуетесь в своей работе -
+            от редактора до специализированных утилит (Intellij Idea, Node.js,
+            GNU Make). Для каждого инструмента укажите, какие задачи Вы с помощью
+            него решаете и почему выбрали именно его.
+          </b>
+        </p>
+        <p><textarea id="software" rows="4" cols="80" onblur="UpdateProgress()"></textarea></p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 12 </h3>
+      <div>
+        <p class="p-text">
+          <b>
+            Пользуетесь ли Вы командной строкой? Какими командами Вы пользуетесь,
+            и какие задачи Вы решаете с их помощью? С какими программами Вы
+            преимущественно или полностью взаимодействуете через интерфейс командной
+            строки?
+          </b>
+        </p>
+        <p><textarea id="command_line" rows="4" cols="80" onblur="UpdateProgress()"></textarea></p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 13 </h3>
+      <div>
+        <p class="p-text">
+          <b>
+            Напишите на JavaScript функцию, которая выводит список всех чисел,
+            которые равны сумме фаториалов своих цифр. Пример такого числа:
+          </b>
+        </p>
+        <p class="p-text"><i> 4! + 0! + 5! + 8! + 5! = 40585 </i></p>
+        <p class="p-text">
+          <b>
+            В качестве ответа на вопрос пришлите ссылку на
+            <a href="http://jsfiddle.net/">http://jsfiddle.net/</a> с вашим
+            кодом или на Ваш репозиторий на
+            <a href="https://github.com/">https://github.com/</a>.
+          </b>
+        </p>
+        <p>
+          <textarea id="factorion" rows="4" cols="80" onblur="CheckLink('factorion')"></textarea>
+          <span id="factorion_warning" class="warning"></span>
+        </p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 14 </h3>
+      <div>
+        <b>
+          <p class="p-text">
+            Вы - пилот грузового межгалактического корабля. Ваша работа -
+            перевозка грузов с одной планеты на другую. Грузоподъёмность Вашего
+            корабля ограничена, поэтому за один рейс Вы можете перевезти не более
+            N кг полезного груза. Ваш корабль умеет сообщать своё состояние
+            (местоположение и степень загруженности), а также летать в любую точку
+            пространства. Каждая планета может содержать на себе груз, который
+            можно взять. Также на каждой планете груз можно оставить.
+          </p>
+          <p class="p-text"> Задание </p>
+          <p class="p-text">
+            Даны незавершенные интерфейсы корабля и планеты. Напишите недостающий
+            код.
+          </p>
+          <p class="p-text">
+            Полное условие задачи доступно на
+            <a href="https://github.com/yandex-shri/introtask-space">
+              https://github.com/yandex-shri/introtask-space
+            </a>.
+          </p>
+          <p class="p-text">
+            В качестве ответа на вопрос пришлите ссылку на
+            <a href="http://jsfiddle.net/">http://jsfiddle.net/</a> с вашим
+            кодом или на Ваш репозиторий на
+            <a href="https://github.com/">https://github.com/</a>.
+          </p>
+        </b>
+        <p>
+          <textarea id="vessel" rows="4" cols="80" onblur="CheckLink('vessel')"></textarea>
+          <span id="vessel_warning" class="warning"></span>
+        </p>
+      </div>
+    </div>
+    <div>
+      <h3> Вопрос 15 </h3>
+      <div>
+        <b>
+          <p class="p-text">
+            Сверстайте форму-анкету с нашими заданиями для кандидатов. Страница
+            должна работать в следующих браузерах: MSIE (8, 9, 10), Google Chrome
+            (26, 27), Firefox (20, 21), Opera (12.14, 12.15), Яндекс.Браузер 1.5.
+            По возможности используйте приёмы безопасной деградации CSS. Страница
+            должна содержать интерактив, реализованный с помощью JS и JQuery. Это
+            может быть:
+          </p>
+          <ul class="p-text">
+            <li> проверка полноты и правильности заполнения полей (где это возможно); </li>
+            <li> возможность свернуть и развернуть разделы (аккордеон); </li>
+            <li> индикатор заполнения анкеты; </li>
+            <li> что-нибудь ещё. </li>
+          </ul>
+          <p class="p-text"> Подумайте над тем, как эти данные будут отправляться на сервер. </p>
+          <p class="p-text"> Будет плюсом, если Вы сверстаете страницу, используя БЭМ.</p>
+          <p class="p-text"> Дополнительные задания: </p>
+          <ol class="p-text">
+            <li>
+              Выполните задание про форму-анкету, используя один из классических
+              шаблонизаторов: Handlebars, mustache, Dust, Jade и т.п.
+            </li>
+            <li>
+              Выполните задание про форму-анкету, используя один из экзотических
+              шаблонизаторов: XSLT, YATE, BEMHTML и т.п.
+            </li>
+          </ol>
+          <p class="p-text">
+            Разработку необходимо вести на
+            <a href="https://github.com/">https://github.com/</a>. В качестве
+            ответа на вопрос пришлите ссылку на проект.
+          </p>
+        </b>
+        <p>
+          <textarea id="makeup" rows="4" cols="80" onblur="CheckGithubLink()"></textarea>
+          <span id="makeup_warning" class="warning"></span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="div-text">
+    <h2> Расскажите нам о себе </h2>
+  </div>
+  <div id="accordion" class="anketa">
+    <div>
+      <h3> Резюме до 250 кб </h3>
+      <div>
+        <div class="file-input-wrapper">
+          <input id="cv" type="file" name="file" onchange="CheckCV()">
+          <button class="file-input-button">Выберите файл</button>
+          <span id="cv_text" class="div-text">Файл не выбран</span><br>
+        </div>
+        <b><span id="cv_warning" class="warning"></span></b>
+      </div>
+    </div>
+    <div>
+      <h3> Ссылка на профиль в Моём круге </h3>
+      <div>
+        <input id="moikrug" type="text" class="input-text" onblur="CheckMoiKrug()" required="required">
+        <b><span id="moikrug_warning" class="warning"></span></b>
+      </div>
+    </div>
+    <div>
+      <h3> Имя, Фамилия </h3>
+      <div>
+        <input id="fio" type="text" class="input-text" onblur="CheckInputForWords('fio')">
+        <b><span id="fio_warning" class="warning"></span></b>
+      </div>
+    </div>
+    <div>
+      <h3> Телефон </h3>
+      <div>
+        <input id="phone" type="text" class="input-text" onblur="CheckPhone()">
+        <b><span id="phone_warning" class="warning"></span></b>
+      </div>
+    </div>
+    <div>
+      <h3> E-mail </h3>
+      <div>
+        <input id="email" type="text" class="input-text" onblur="CheckEmail()">
+        <b><span id="email_warning" class="warning"></span></b>
+      </div>
+    </div>
+    <div>
+      <h3> Дополнительные сведения </h3>
+      <div>
+        <textarea rows="4" cols="80"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="div-text">
+    <p> Откуда Вы узнали о нашем предложении? </p>
+    </p>
+      <select id="source" onchange="CheckSource()">
+        <option value="choose"> Выбрать </option>
+        <option value="hrmanager"> От HR-менеджера Яндекса </option>
+        <option value="yasubbotnik"> Я.Субботник </option>
+        <option value="yac"> Yet Another Conference </option>
+        <option value="conference"> На другой конференции </option>
+        <option value="search"> Из поиска </option>
+        <option value="recommendation"> По рекомендации </option>
+        <option value="other"> Другое </option>
+      </select>
+    <p><b><span id="source_warning" class="warning"></span></b></p>
+    <p>
+      <input id="agree" type="checkbox" name="agree" value="agree" onchange="CheckAgreement()">
+      <b>
+        Я даю своё согласие на передачу в ООО "Яндекс" резюме и/или анкеты,
+        содержащих мои персональные данные, и согласен с тем, что они будут
+        храниться в ООО "Яндекс" в течение 5 лет и будут обрабатываться
+        исключительно для целей предложения мне вакансий группы компаний
+        "Яндекс", в соответствии с Федеральным законом "О персональных данных".
+      </b>
+    </p>
+    <p><b><span id="agree_warning" class="warning"></span></b></p>
+    <button type="button"> Отправить </button>
+    <button type="button"> Очистить </button>
+  </div>
+  </form>
+</body>
+</html>

@@ -1,0 +1,68 @@
+h1 {
+  font-family: arial, verdana, sans-serif;
+  font-size: 180%;
+}
+h2 {
+  font-family: arial, verdana, sans-serif;
+  font-size: 150%;
+}
+h3 {
+  font-family: "Times New Roman", serif;
+  font-size: 120%;
+  font-weight: normal;
+}
+p {
+  font-family: "Times New Roman", serif;
+  text-align: justify;
+}
+.input-text {
+  width: 98%;
+  font-size: 90%;
+}
+.p-text {
+  font-family: "Times New Roman", serif;
+  font-size: 90%;
+}
+.div-text {
+  font-family: "Times New Roman", serif;
+  width: 33em;
+}
+.anketa {
+  width: 33em;
+  height: auto;
+}
+.warning {
+  font-family: "Times New Roman", serif;
+  color: red;
+}
+.progress {
+  position: fixed;
+  margin-left: 35em;
+  width: 20em;
+  height: 2em;
+}
+.progress-label {
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #fff;
+}
+div.file-input-wrapper > input[type="file"] {
+  position: absolute;
+  opacity: 0;
+}
+div.file-input-wrapper > button.file-input-button {
+  font-family: "Times New Roman", serif;
+  margin-right: 0em;
+  margin-left: 0em;
+}
+textarea {
+  width: 25em;
+  border: 1px solid;
+  min-width: 25em;
+  max-width: 25em;
+}
+button {
+  margin-right: 6em;
+  margin-left: 6em;
+}
